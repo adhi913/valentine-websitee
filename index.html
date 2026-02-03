@@ -10,71 +10,36 @@
 
 <style>
 
+/* General */
+
 body{
   margin:0;
   font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#ff758c,#ff7eb3);
-  color:#333;
+  background:linear-gradient(135deg,#ff5f9e,#ff9acb);
+  overflow-x:hidden;
 }
 
-/* Header */
+.hidden{
+  display:none;
+}
 
-header{
+.center{
   text-align:center;
-  padding:60px 20px;
+  padding:40px 20px;
+}
+
+/* Screens */
+
+.screen{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
   color:white;
 }
 
-header h1{
-  font-size:36px;
-  margin-bottom:10px;
-}
-
-header p{
-  font-size:18px;
-}
-
-/* Container */
-
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:20px;
-}
-
-/* Card */
-
-.card{
-  background:white;
-  border-radius:20px;
-  padding:30px;
-  margin-bottom:30px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.15);
-  text-align:center;
-}
-
-/* Gallery */
-
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-  margin-top:20px;
-}
-
-.gallery img{
-  width:100%;
-  height:260px;
-  object-fit:cover;
-  border-radius:15px;
-  transition:0.3s;
-}
-
-.gallery img:hover{
-  transform:scale(1.05);
-}
-
-/* Button */
+/* Buttons */
 
 button{
   background:#ff3366;
@@ -84,6 +49,7 @@ button{
   border-radius:30px;
   font-size:16px;
   cursor:pointer;
+  margin-top:15px;
   transition:0.3s;
 }
 
@@ -91,23 +57,59 @@ button:hover{
   background:#e6004c;
 }
 
-/* Message */
+/* Game */
 
-#loveMessage{
-  display:none;
-  margin-top:20px;
-  font-size:18px;
-  color:#ff3366;
-  font-weight:600;
+#gameArea{
+  width:300px;
+  height:400px;
+  background:white;
+  border-radius:20px;
+  position:relative;
+  overflow:hidden;
 }
 
-/* Footer */
+.heart{
+  position:absolute;
+  font-size:25px;
+  cursor:pointer;
+}
+
+/* Main Site */
+
+header{
+  color:white;
+  padding:40px 20px;
+  text-align:center;
+}
+
+.card{
+  background:white;
+  margin:20px auto;
+  padding:25px;
+  border-radius:20px;
+  max-width:800px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  text-align:center;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+  margin-top:20px;
+}
+
+.gallery img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-radius:15px;
+}
 
 footer{
+  color:white;
   text-align:center;
   padding:20px;
-  color:white;
-  font-size:14px;
 }
 
 </style>
@@ -116,49 +118,91 @@ footer{
 <body>
 
 <!-- Music -->
-<audio id="bgMusic" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3">
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3">
 </audio>
+
+<!-- SCREEN 1: Welcome -->
+
+<div id="welcome" class="screen">
+
+  <h1>Welcome My Love 💖</h1>
+
+  <p>Hey Amrutha 😘<br>
+  Catch 5 hearts to unlock my heart ❤️</p>
+
+  <button onclick="startGame()">Start Game 🎮</button>
+
+</div>
+
+<!-- SCREEN 2: Game -->
+
+<div id="game" class="screen hidden">
+
+  <h2>Catch the Hearts 💕</h2>
+
+  <p>Score: <span id="score">0</span> / 5</p>
+
+  <div id="gameArea"></div>
+
+</div>
+
+<!-- SCREEN 3: Main Site -->
+
+<div id="main" class="hidden">
 
 <header>
   <h1>Happy Valentine's Day 💖</h1>
-  <p>Adhi & Amrutha — Our Love Story</p>
+  <p>Adhi & Amrutha Forever 😘</p>
 </header>
 
-<div class="container">
+<div class="card">
 
-  <!-- Message Card -->
-  <div class="card">
+  <h2>My Message 💌</h2>
 
-    <h2>My Dear Amrutha 💕</h2>
+  <p>
+    You are my favorite notification ❤️<br>
+    My comfort 😌<br>
+    My crazy 😜<br>
+    My everything 💕
+  </p>
 
-    <p>
-      You make my life brighter every day.  
-      You are my smile, my strength, my happiness.
-      <br><br>
-      Life feels perfect with you ❤️
+  <button onclick="showLove()">Open My Heart 💝</button>
+
+  <div id="loveText" class="hidden">
+
+    <p style="color:#ff3366;font-weight:600;">
+      I Love You So Much Amrutha 💖<br>
+      Will You Be My Valentine Forever? 💍<br><br>
+      — Your Adhi 😘
     </p>
 
-    <button onclick="showLove()">Click for Surprise 💌</button>
+  </div>
 
-    <div id="loveMessage">
-      I Love You Always 💕<br>
-      Will You Be My Valentine Forever? 💍<br><br>
-      — Adhi 😘
-    </div>
+</div>
+
+<div class="card">
+
+  <h2>Our Memories 📸</h2>
+
+  <div class="gallery">
+
+    <img src="photo1.jpg">
 
   </div>
 
-  <!-- Gallery Card -->
-  <div class="card">
+</div>
 
-    <h2>Our Memories 📸</h2>
+<div class="card">
 
-    <div class="gallery">
-      <img src="photo1.jpg">
-    </div>
+  <h2>Mini Quiz 😆</h2>
 
-  </div>
+  <p>Who Loves You More?</p>
+
+  <button onclick="quiz('me')">Adhi 😎</button>
+  <button onclick="quiz('you')">Amrutha 😍</button>
+
+  <p id="quizResult"></p>
 
 </div>
 
@@ -166,12 +210,86 @@ footer{
   Made with ❤️ by Adhi
 </footer>
 
+</div>
+
 <script>
 
+let score = 0;
+let gameInterval;
+
+/* Start Game */
+function startGame(){
+
+  document.getElementById("welcome").classList.add("hidden");
+  document.getElementById("game").classList.remove("hidden");
+
+  gameInterval = setInterval(createHeart,800);
+
+}
+
+/* Create Hearts */
+function createHeart(){
+
+  const area = document.getElementById("gameArea");
+
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+
+  heart.style.left = Math.random()*260+"px";
+  heart.style.top = Math.random()*360+"px";
+
+  heart.onclick = function(){
+
+    score++;
+    document.getElementById("score").innerText = score;
+    heart.remove();
+
+    if(score >= 5){
+      endGame();
+    }
+
+  };
+
+  area.appendChild(heart);
+
+  setTimeout(()=>{
+    if(heart.parentNode){
+      heart.remove();
+    }
+  },2000);
+
+}
+
+/* End Game */
+function endGame(){
+
+  clearInterval(gameInterval);
+
+  document.getElementById("game").classList.add("hidden");
+  document.getElementById("main").classList.remove("hidden");
+
+  document.getElementById("music").play();
+
+}
+
+/* Show Love */
 function showLove(){
 
-  document.getElementById("loveMessage").style.display="block";
-  document.getElementById("bgMusic").play();
+  document.getElementById("loveText").classList.remove("hidden");
+
+}
+
+/* Quiz */
+function quiz(answer){
+
+  const result = document.getElementById("quizResult");
+
+  if(answer === "you"){
+    result.innerHTML = "Correct 😍 You Love Me Most ❤️";
+  }else{
+    result.innerHTML = "Wrong 😜 I Love You More 💕";
+  }
 
 }
 
